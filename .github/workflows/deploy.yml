@@ -24,7 +24,9 @@ jobs:
         docker build -t fastapi-app .
         kubectl apply -f deployment.yml
         kubectl apply -f service.yml
-        kubectl rollout status fastapi-intent-app
+        kubectl get services
+        kubectl get deployments
+        kubectl rollout status deployment.apps/fastapi-intent-app
 
     - name: Get Service URL
       run: |
