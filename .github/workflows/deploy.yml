@@ -1,0 +1,31 @@
+name: Deploy FastAPI on Minikube
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Set up Minikube
+      uses: medyagh/setup-minikube@master
+      with:
+        minikube-version: 'latest'
+    
+    - name: Build & Push Docker Image
+      run: |
+        eval $(minikube docker-env)
+        docker build -t fastapi-app .
+        kubectl apply -f deployment.yaml
+        kubectl apply -f service.yaml
+        kubectl rollout status deployment/fastapi-app
+
+    - name: Get Service URL
+      run: |
+        minikube service fastapi-service --url

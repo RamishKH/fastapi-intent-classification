@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi-intent-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fastapi-intent-app
+  template:
+    metadata:
+      labels:
+        app: fastapi-intent-app
+    spec:
+      containers:
+        - name: fastapi-intent-app
+          image: ramishkh/intent-flask-app:2.0  # Use locally built image
+          ports:
+            - containerPort: 8000
