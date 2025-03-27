@@ -22,8 +22,8 @@ jobs:
       run: |
         eval $(minikube docker-env)
         docker build -t fastapi-app .
-        kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
+        kubectl apply -f deployment.yml
+        kubectl apply -f service.yml
         kubectl rollout status deployment/fastapi-app
 
     - name: Get Service URL
