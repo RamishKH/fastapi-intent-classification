@@ -26,6 +26,8 @@ jobs:
         kubectl apply -f service.yml
         kubectl get services
         kubectl get deployments
+        kubectl get pods
+        kubectl logs -l app=fastapi-intent-app
         kubectl rollout status deployment.apps/fastapi-intent-app
 
     - name: Get Service URL
